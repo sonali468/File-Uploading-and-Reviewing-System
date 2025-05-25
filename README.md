@@ -13,6 +13,6 @@ A simple web application that allows users to upload multiple files (images, PDF
 2. Select files using the file input.
 3. Previews will appear below automatically.
 
-## Screenshots
+## 📷 Screenshots
 
-![Screenshot]("C:\Users\sonal\OneDrive\Pictures\Screenshots\file_uploading.png")
+![file_uploading](https://github.com/user-attachments/assets/50bf33de-1561-4c8f-9c00-397450a52387)
