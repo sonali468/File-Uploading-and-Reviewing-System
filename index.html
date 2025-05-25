@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload with Preview</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 20px; }
+        #preview { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+        .preview-item { border: 1px solid #ccc; padding: 10px; max-width: 200px; word-break: break-all; }
+        iframe, img { width: 100%; height: auto; }
+    </style>
+</head>
+<body>
+
+    <h2>Upload Files (Images, PDFs, Documents)</h2>
+    <input type="file" id="fileInput" multiple>
+    <div id="preview"></div>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            let previewContainer = document.getElementById('preview');
+            previewContainer.innerHTML = ''; 
+
+            Array.from(event.target.files).forEach(file => {
+                let reader = new FileReader();
+                let previewItem = document.createElement('div');
+                previewItem.className = 'preview-item';
+
+                if (file.type.startsWith("image/")) {
+                    reader.onload = function(e) {
+                        previewItem.innerHTML = `<img src="${e.target.result}" alt="Image Preview">`;
+                    };
+                } else if (file.type === "application/pdf") {
+                    reader.onload = function(e) {
+                        previewItem.innerHTML = `<iframe src="${e.target.result}" frameborder="0"></iframe>`;
+                    };
+                } else {
+                    previewItem.innerHTML = `<p>${file.name}</p>`;
+                }
+
+                reader.readAsDataURL(file);
+                previewContainer.appendChild(previewItem);
+            });
+        });
+    </script>
+
+</body>
+</html>
